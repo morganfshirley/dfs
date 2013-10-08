@@ -13,6 +13,7 @@ private:
 	Object *player;
 
 	char getInput();
+	void dealWithKeys(unsigned char);
 public:
 	Engine();
 	~Engine();

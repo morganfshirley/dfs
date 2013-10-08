@@ -4,13 +4,21 @@ char Engine::getInput() {
 	return getch();
 }
 
+void Engine::dealWithKeys(unsigned char ch) {
+
+	//exit the game if we press q (TODO remove this in favor of a menu)
+	if(ch == 'q' || ch == 'Q') {
+		running = false;
+	}
+}
+
 Engine::Engine() {
 	running = true;
 
 	//Testing, TODO remove
-	object_list.push_back(new Object(2, 3));
-	object_list.push_back(new Object(4, 5));
-	object_list.push_back(new Object(9, 1));
+	object_list.push_back(new Object(new RenderComponent(NULL, '!'), 3, 4));
+	object_list.push_back(new Object(new RenderComponent(NULL, 'g'), 6, 1));
+	object_list.push_back(new Object(new RenderComponent(NULL, '3'), 23, 4));
 }
 
 Engine::~Engine() {
@@ -25,7 +33,14 @@ bool Engine::isRunning() {
 }
 
 void Engine::run() {
+	//Run objects
+	for(int i = 0; i < object_list.size(); i++) {
+		object_list.at(i)->run();
+	}
+
+	//Keyboard input
 	char ch = getInput();
+	dealWithKeys(ch);
 }
 
 void Engine::render() {
@@ -42,4 +57,8 @@ void Engine::render() {
 			object_list.at(i)->render()
 		);
 	}
+
+	//Draw cursor
+	curs_set(0);
+	drawPointer(0, 0);
 }

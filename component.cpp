@@ -1,13 +1,18 @@
+#include "object.h" //Forward-declared in component.h
 #include "component.h"
 
-Component::Component() {
-	symbol = '$';
+Component::Component(Object* parent) {
+	object = parent;
 }
 
-unsigned char Component::getSymbol() {
-	return symbol;
+void Component::setObject(Object *newObject) {
+	object = newObject;
 }
 
-void Component::setSymbol(unsigned char in) {
-	symbol = in;
+Object* Component::getObject() {
+	return object;
+}
+
+void Component::run() {
+
 }

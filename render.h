@@ -4,5 +4,6 @@
 #include <ncurses.h>
 
 void initNCurses();
+void drawPointer(int, int);
 
 #endif //RENDER_H
