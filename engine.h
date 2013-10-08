@@ -1,6 +1,7 @@
 //The Engine is what does the stuff
 
 #include <vector>
+#include <ncurses.h>
 
 #include "render.h"
 #include "object.h"
@@ -14,8 +15,9 @@ private:
 	char getInput();
 public:
 	Engine();
+	~Engine();
 
 	bool isRunning();
 	void run();
 	void render();
-}
+};

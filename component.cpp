@@ -8,6 +8,6 @@ unsigned char Component::getSymbol() {
 	return symbol;
 }
 
-void setSymbol(unsigned char in) {
+void Component::setSymbol(unsigned char in) {
 	symbol = in;
 }

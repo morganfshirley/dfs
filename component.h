@@ -8,6 +8,6 @@ public:
 	Component();
 	unsigned char getSymbol();
 	void setSymbol(unsigned char);
-}
+};
 
 #endif //COMPONENT_H

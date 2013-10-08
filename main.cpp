@@ -7,11 +7,12 @@
 #include <vector>
 
 #include "render.h"
+#include "engine.h"
 
 int main() {
 	initNCurses();
 
-	Engine engine();
+	Engine engine;
 
 	while(engine.isRunning()) {
 		clear();
