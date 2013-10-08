@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "render.h"
+#include "object.h"
 
 class Engine {
 private:
