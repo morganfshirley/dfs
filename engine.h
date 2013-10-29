@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <ncurses.h>
+#include <cstdlib>
+#include <ctime>
 
 #include "render.h"
 #include "object.h"

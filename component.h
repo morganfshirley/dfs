@@ -10,7 +10,6 @@ private:
 protected:	
 	Object *object; //the parent object
 public:
-	Component(Object*);
 	void setObject(Object*);
 	Object* getObject();
 

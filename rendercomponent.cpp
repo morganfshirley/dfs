@@ -1,11 +1,11 @@
 #include "object.h" //Forward-declared in component.h
 #include "rendercomponent.h"
 
-RenderComponent::RenderComponent(Object* parent) : Component(parent){
+RenderComponent::RenderComponent(){
 	symbol = '?';
 }
 
-RenderComponent::RenderComponent(Object* parent, unsigned char in) : Component(parent) {
+RenderComponent::RenderComponent(unsigned char in) {
 	symbol = in;
 }
 

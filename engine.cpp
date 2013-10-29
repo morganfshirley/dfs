@@ -16,15 +16,19 @@ Engine::Engine() {
 	running = true;
 
 	//Testing, TODO remove
-	object_list.push_back(new Object(new RenderComponent(NULL, '!'), 3, 4));
-	object_list.push_back(new Object(new RenderComponent(NULL, 'g'), 6, 1));
-	object_list.push_back(new Object(new RenderComponent(NULL, '3'), 23, 4));
+	object_list.push_back(new Object(new RenderComponent('!'), 3, 4));
+	object_list.push_back(new Object(new RenderComponent('g'), 6, 1));
+	object_list.push_back(new Object(new RenderComponent('3'), 23, 4));
+	object_list.at(0)->addComponent(new BaseLogicComponent());
+
+	srand(time(NULL));
 }
 
 Engine::~Engine() {
 	while(object_list.size() > 0) {
-		delete object_list.back();
+		Object *deleted_ptr = object_list.back();
 		object_list.pop_back();
+		delete deleted_ptr;
 	}
 }
 

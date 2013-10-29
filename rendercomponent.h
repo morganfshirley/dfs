@@ -7,8 +7,8 @@ class RenderComponent : public Component {
 private:
 	unsigned char symbol;
 public:
-	RenderComponent(Object*);
-	RenderComponent(Object*, unsigned char);
+	RenderComponent();
+	RenderComponent(unsigned char);
 	unsigned char getSymbol();
 	void setSymbol(unsigned char);	
 

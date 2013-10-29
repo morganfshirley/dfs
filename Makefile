@@ -23,3 +23,6 @@ engine.o: engine.cpp engine.h render.h object.h
 
 render.o: render.cpp render.h
 	g++ -g -c render.cpp
+
+clean:
+	rm -rf *.o

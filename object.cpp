@@ -20,11 +20,11 @@ Object::Object(Component *c, int x, int y) {
 	symbol = '?'; //A rather elegant solution
 }
 
-Object::~Object() {
+Object::~Object() {/**
 	while(components.size() > 0) {
-		delete components.back();
+		delete components.at(components.size() - 1);
 		components.pop_back();
-	}
+	}*/
 }
 
 Object::Object(const Object &that) {
