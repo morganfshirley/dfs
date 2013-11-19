@@ -1,14 +1,22 @@
 #include "engine.h"
 
-char Engine::getInput() {
+int Engine::getInput() {
 	return getch();
 }
 
-void Engine::dealWithKeys(unsigned char ch) {
+void Engine::dealWithKeys(int ch) {
 
 	//exit the game if we press q (TODO remove this in favor of a menu)
 	if(ch == 'q' || ch == 'Q') {
 		running = false;
+	}
+	else if( //The following should be sent to the player
+		ch == KEY_LEFT	||	ch == KEY_RIGHT	||
+		ch == KEY_UP	||	ch == KEY_DOWN	||
+		ch == KEY_A1	||	ch == KEY_A3	||
+		ch == KEY_C1	||	ch == KEY_C3	||
+		ch == KEY_B2 ) {
+		player_brain->setInput(ch);
 	}
 }
 
@@ -20,6 +28,12 @@ Engine::Engine() {
 	object_list.push_back(new Object(new RenderComponent('g'), 6, 1));
 	object_list.push_back(new Object(new RenderComponent('3'), 23, 4));
 	object_list.at(0)->addComponent(new BaseLogicComponent());
+	
+	player = new Object(new RenderComponent('@'), 10, 10);
+	object_list.push_back(player);
+	
+	player_brain = new PlayerLogicComponent();
+	player->addComponent(player_brain);	
 
 	srand(time(NULL));
 }
@@ -37,14 +51,14 @@ bool Engine::isRunning() {
 }
 
 void Engine::run() {
+	//Keyboard input
+	int ch = getInput();
+	dealWithKeys(ch);
+
 	//Run objects
 	for(int i = 0; i < object_list.size(); i++) {
 		object_list.at(i)->run();
 	}
-
-	//Keyboard input
-	char ch = getInput();
-	dealWithKeys(ch);
 }
 
 void Engine::render() {

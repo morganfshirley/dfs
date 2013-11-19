@@ -7,15 +7,17 @@
 
 #include "render.h"
 #include "object.h"
+#include "playerlogiccomponent.h"
 
 class Engine {
 private:
 	bool running;
 	std::vector<Object*> object_list;
 	Object *player;
+	PlayerLogicComponent *player_brain;
 
-	char getInput();
-	void dealWithKeys(unsigned char);
+	int getInput();
+	void dealWithKeys(int);
 public:
 	Engine();
 	~Engine();
