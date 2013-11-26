@@ -8,6 +8,8 @@
 #include "render.h"
 #include "object.h"
 #include "playerlogiccomponent.h"
+#include "speciescomponent.h"
+#include "species.h"
 
 class Engine {
 private:
@@ -18,6 +20,8 @@ private:
 
 	int getInput();
 	void dealWithKeys(int);
+
+	std::vector<Species> species_list;
 public:
 	Engine();
 	~Engine();

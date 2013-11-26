@@ -23,15 +23,30 @@ void Engine::dealWithKeys(int ch) {
 Engine::Engine() {
 	running = true;
 
+	Species s_donkey;
+	s_donkey.name = "donkey";
+	s_donkey.symbol = 'D';
+	species_list.push_back(s_donkey);
+
+	Species s_human;
+	s_human.name = "human";
+	s_human.symbol = '@';
+	species_list.push_back(s_human);
+
 	//Testing, TODO remove
 	object_list.push_back(new Object(new RenderComponent('!'), 3, 4));
 	object_list.push_back(new Object(new RenderComponent('g'), 6, 1));
 	object_list.push_back(new Object(new RenderComponent('3'), 23, 4));
-	object_list.at(0)->addComponent(new BaseLogicComponent());
 	
-	player = new Object(new RenderComponent('@'), 10, 10);
-	object_list.push_back(player);
-	
+	//Donkey
+	object_list.push_back(new Object(new SpeciesComponent(&(species_list.at(0))), 4, 7));
+	BaseLogicComponent *donkey_brain = new BaseLogicComponent();
+	donkey_brain->setMotivationWeight(5, 100);
+	object_list.back()->addComponent(donkey_brain);
+
+	//Player
+	player = new Object(new SpeciesComponent(&(species_list.at(1))), 10, 10);
+	object_list.push_back(player);	
 	player_brain = new PlayerLogicComponent();
 	player->addComponent(player_brain);	
 

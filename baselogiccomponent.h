@@ -20,6 +20,8 @@
 
 #include "component.h"
 
+#include <vector>
+
 class BaseLogicComponent : public Component {
 private:
 	//get the highest motivation. 
@@ -30,9 +32,16 @@ private:
 
 	double initiative;
 	double motivation_weights[M_NUMBER];
+
+	std::vector<int> planned_path;
+	void planPath(int, int);
+
+	void move(int);
 public:
 	BaseLogicComponent();
 	virtual void run();
+	
+	virtual void setMotivationWeight(int, double);
 };
 
 #endif //BASELOGICCOMPONENT_H

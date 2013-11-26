@@ -4,7 +4,7 @@
 #include "component.h"
 
 class RenderComponent : public Component {
-private:
+protected:
 	unsigned char symbol;
 public:
 	RenderComponent();
