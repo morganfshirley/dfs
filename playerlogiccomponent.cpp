@@ -37,3 +37,7 @@ void PlayerLogicComponent::act() {
 			break;
 	}
 }
+
+double PlayerLogicComponent::getInitiative() {
+	return initiative;
+}

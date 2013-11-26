@@ -2,22 +2,30 @@
 
 Object::Object() {
 	symbol = '?'; //A rather elegant solution
+	base_stats = 0;
+	modified_stats = 0;
 }
 
 Object::Object(int x, int y) {
 	setPosition(x, y);
 	symbol = '?'; //A rather elegant solution
+	base_stats = 0;
+	modified_stats = 0;
 }
 
 Object::Object(Component *c) {
 	addComponent(c);
 	symbol = '?'; //A rather elegant solution
+	base_stats = 0;
+	modified_stats = 0;
 }
 
 Object::Object(Component *c, int x, int y) {
 	addComponent(c);
 	setPosition(x, y);
 	symbol = '?'; //A rather elegant solution
+	base_stats = 0;
+	modified_stats = 0;
 }
 
 Object::~Object() {/**
@@ -82,4 +90,74 @@ unsigned char Object::getSymbol() {
 
 void Object::setSymbol(unsigned char in) {
 	symbol = in;
+}
+
+Stats * Object::getBaseStats() {
+	return base_stats;
+}
+
+void Object::setBaseStats(Stats *in) {
+	base_stats = in;
+	if(modified_stats == 0) {
+		modified_stats = new Stats;
+		*modified_stats = *in;
+	}
+}
+
+unsigned int Object::getSpeed() {
+	return modified_stats->speed;
+}
+
+unsigned int Object::getHitpoints() {
+	return modified_stats->hitpoints;
+}
+double Object::getStrength() {
+	return modified_stats->strength;
+}
+double Object::getArmorclass() {
+	return modified_stats->armorclass;
+}
+
+void Object::setSpeed(int in, bool relative) {
+	if(relative) {
+		if(modified_stats->speed + in < 0) {
+			modified_stats->speed = 0;
+			return;
+		}
+		modified_stats->speed += in;
+	}
+	else {
+		modified_stats->speed = in;
+	}
+}
+
+void Object::setHitpoints(int in, bool relative) {
+	if(relative) {
+		if(modified_stats->hitpoints + in < 0) {
+			modified_stats->hitpoints = 0;
+			return;
+		}
+		modified_stats->hitpoints += in;
+	}
+	else {
+		modified_stats->hitpoints = in;
+	}
+}
+
+void Object::setStrength(double in, bool relative) {
+	if(relative) {
+		modified_stats->strength += in;
+	}
+	else {
+		modified_stats->strength = in;
+	}
+}
+
+void Object::setArmorclass(double in, bool relative) {
+	if(relative) {
+		modified_stats->armorclass += in;
+	}
+	else {
+		modified_stats->armorclass = in;
+	}
 }

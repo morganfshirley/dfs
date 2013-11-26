@@ -15,6 +15,8 @@ public:
 	
 	//If there's any input that changes the state of the player, put it here.
 	void setInput(int);
+
+	double getInitiative();
 };
 
 #endif //PLAYERLOGICCOMPONENT_H

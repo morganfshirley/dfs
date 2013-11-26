@@ -26,11 +26,23 @@ Engine::Engine() {
 	Species s_donkey;
 	s_donkey.name = "donkey";
 	s_donkey.symbol = 'D';
+	Stats s_donkey_stats;
+	s_donkey_stats.speed = 89; //25 mph in ms/m
+	s_donkey_stats.hitpoints = 50;
+	s_donkey_stats.strength = 50;
+	s_donkey_stats.armorclass = 10;
+	s_donkey.stats = s_donkey_stats;
 	species_list.push_back(s_donkey);
 
 	Species s_human;
 	s_human.name = "human";
 	s_human.symbol = '@';
+	Stats s_human_stats;
+	s_human_stats.speed = 149; //15 mph
+	s_human_stats.hitpoints = 10;
+	s_human_stats.strength = 5;
+	s_human_stats.armorclass = 0;
+	s_human.stats = s_human_stats;
 	species_list.push_back(s_human);
 
 	//Testing, TODO remove
@@ -39,13 +51,15 @@ Engine::Engine() {
 	object_list.push_back(new Object(new RenderComponent('3'), 23, 4));
 	
 	//Donkey
-	object_list.push_back(new Object(new SpeciesComponent(&(species_list.at(0))), 4, 7));
+	object_list.push_back(new Object(4, 7));
+	object_list.back()->addComponent(new SpeciesComponent(&(species_list.at(0)))); 
 	BaseLogicComponent *donkey_brain = new BaseLogicComponent();
 	donkey_brain->setMotivationWeight(5, 100);
 	object_list.back()->addComponent(donkey_brain);
 
 	//Player
-	player = new Object(new SpeciesComponent(&(species_list.at(1))), 10, 10);
+	player = new Object(10, 10);
+	player->addComponent(new SpeciesComponent(&(species_list.at(1)))); 
 	object_list.push_back(player);	
 	player_brain = new PlayerLogicComponent();
 	player->addComponent(player_brain);	
@@ -66,9 +80,11 @@ bool Engine::isRunning() {
 }
 
 void Engine::run() {
-	//Keyboard input
-	int ch = getInput();
-	dealWithKeys(ch);
+	if(player_brain->getInitiative() >= 0) {
+		//Keyboard input
+		int ch = getInput();
+		dealWithKeys(ch);
+	}
 
 	//Run objects
 	for(int i = 0; i < object_list.size(); i++) {

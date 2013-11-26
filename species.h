@@ -3,9 +3,12 @@
 
 #include <string>
 
+#include "stats.h"
+
 typedef struct Species {
 	std::string name;
 	unsigned char symbol;
+	Stats stats;
 } Species;
 
 #endif

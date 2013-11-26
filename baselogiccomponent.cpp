@@ -47,12 +47,8 @@ void BaseLogicComponent::act() {
 			break;
 		default:
 			//Act if we feel like it
-			if(initiative > 0) {
-				move(rand() % 5);
-				initiative = initiative - 5;
-			}
+			move(rand() % 5);
 	}
-	initiative++;
 }
 
 void BaseLogicComponent::planPath(int new_x, int new_y) {
@@ -121,7 +117,12 @@ BaseLogicComponent::BaseLogicComponent() {
  */
 
 void BaseLogicComponent::run() {
-	act();
+	//Act if we feel like it
+	if(initiative >= 0) {
+		act();
+		initiative -= object->getSpeed();
+	}
+	initiative++;
 }
 
 void BaseLogicComponent::setMotivationWeight(int motivation, double weight) {

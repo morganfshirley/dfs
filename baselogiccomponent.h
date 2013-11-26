@@ -30,11 +30,12 @@ private:
 
 	virtual void act();
 
-	double initiative;
-	double motivation_weights[M_NUMBER];
-
 	std::vector<int> planned_path;
 	void planPath(int, int);
+
+protected:
+	double initiative;
+	double motivation_weights[M_NUMBER];
 
 	void move(int);
 public:

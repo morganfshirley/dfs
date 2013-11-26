@@ -6,6 +6,7 @@
 #include "component.h"
 #include "rendercomponent.h"
 #include "baselogiccomponent.h"
+#include "stats.h"
 
 class Object {
 private:
@@ -15,6 +16,9 @@ private:
 	int y;
 
 	unsigned char symbol;
+
+	Stats *base_stats;
+	Stats *modified_stats;
 public:
 	Object();
 	Object(int, int);
@@ -36,6 +40,21 @@ public:
 
 	unsigned char getSymbol();
 	void setSymbol(unsigned char);
+
+	Stats *getBaseStats();
+	void setBaseStats(Stats*);
+	
+	//Modified stats
+	unsigned int getSpeed();
+	unsigned int getHitpoints();
+	double getStrength();
+	double getArmorclass();
+
+	//Setters. automatically will set stats relatively.
+	void setSpeed(int, bool = true); 
+	void setHitpoints(int, bool = true);
+	void setStrength(double, bool = true);
+	void setArmorclass(double, bool = true);
 };
 
 #endif //OBJECT_H

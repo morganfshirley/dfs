@@ -10,5 +10,7 @@ private:
 public:
 	SpeciesComponent();
 	SpeciesComponent(Species*);
+
+	void run();
 };
 #endif

@@ -3,10 +3,14 @@
 
 SpeciesComponent::SpeciesComponent() {
 	species = NULL;
-	symbol = '?';
+	object->setSymbol('?');
 }
 
 SpeciesComponent::SpeciesComponent(Species *new_species) {
 	species = new_species;
-	symbol = species->symbol;
+}
+
+void SpeciesComponent::run() {	
+	object->setSymbol(species->symbol);
+	object->setBaseStats(&(species->stats));
 }
