@@ -1,0 +1,6 @@
+[name="donkey" symbol="D" speed="89" hitpoints="50" strength="50" armorclass="10"]
+[name="human" symbol="@" speed="149" hitpoints="10" strength="5" armorclass="0"]
+
+[name="armadillo" symbol="a" speed="75" hitpoints="10" strength="2" armorclass="100"]
+[name="antelope" symbol="A" speed="41" hitpoints="30" strength="8" armorclass="3"]
+[name="bat" symbol="b" speed="89" hitpoints="2" strength="1" armorclass="0"]

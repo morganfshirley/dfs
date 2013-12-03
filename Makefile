@@ -1,7 +1,7 @@
 all: dfs
 
-dfs: main.o object.o component.o baselogiccomponent.o rendercomponent.o speciescomponent.o playerlogiccomponent.o engine.o render.o
-	g++ -g main.o object.o component.o baselogiccomponent.o rendercomponent.o engine.o playerlogiccomponent.o speciescomponent.o render.o -lncurses -o dfs
+dfs: main.o object.o component.o baselogiccomponent.o rendercomponent.o species.o speciescomponent.o playerlogiccomponent.o engine.o render.o
+	g++ -g main.o object.o component.o baselogiccomponent.o rendercomponent.o engine.o playerlogiccomponent.o species.o speciescomponent.o render.o -lncurses -o dfs
 
 main.o: main.cpp engine.h 
 	g++ -g -c main.cpp
@@ -20,6 +20,9 @@ playerlogiccomponent.o : playerlogiccomponent.cpp playerlogiccomponent.h
 
 rendercomponent.o: rendercomponent.cpp rendercomponent.h
 	g++ -g -c rendercomponent.cpp
+
+species.o: species.cpp species.h
+	g++ -g -c species.cpp
 
 speciescomponent.o: speciescomponent.cpp speciescomponent.h species.h
 	g++ -g -c speciescomponent.cpp

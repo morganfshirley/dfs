@@ -4,6 +4,7 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "render.h"
 #include "object.h"

@@ -23,32 +23,21 @@ void Engine::dealWithKeys(int ch) {
 Engine::Engine() {
 	running = true;
 
-	Species s_donkey;
-	s_donkey.name = "donkey";
-	s_donkey.symbol = 'D';
-	Stats s_donkey_stats;
-	s_donkey_stats.speed = 89; //25 mph in ms/m
-	s_donkey_stats.hitpoints = 50;
-	s_donkey_stats.strength = 50;
-	s_donkey_stats.armorclass = 10;
-	s_donkey.stats = s_donkey_stats;
-	species_list.push_back(s_donkey);
+	//Load species
+	std::ifstream species_file;
+	species_file.open("species.dat");
 
-	Species s_human;
-	s_human.name = "human";
-	s_human.symbol = '@';
-	Stats s_human_stats;
-	s_human_stats.speed = 149; //15 mph
-	s_human_stats.hitpoints = 10;
-	s_human_stats.strength = 5;
-	s_human_stats.armorclass = 0;
-	s_human.stats = s_human_stats;
-	species_list.push_back(s_human);
+	Species new_species;
+	while(loadSpecies(&new_species, &species_file)) {
+		species_list.push_back(new_species);
+	}
+	
+	species_file.close();
 
 	//Testing, TODO remove
-	object_list.push_back(new Object(new RenderComponent('!'), 3, 4));
-	object_list.push_back(new Object(new RenderComponent('g'), 6, 1));
-	object_list.push_back(new Object(new RenderComponent('3'), 23, 4));
+	object_list.push_back(new Object(new SpeciesComponent(&(species_list.at(4))), 3, 4));
+	object_list.push_back(new Object(new SpeciesComponent(&(species_list.at(3))), 6, 1));
+	object_list.push_back(new Object(new SpeciesComponent(&(species_list.at(2))), 23, 4));
 	
 	//Donkey
 	object_list.push_back(new Object(4, 7));
