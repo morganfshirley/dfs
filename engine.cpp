@@ -98,11 +98,16 @@ void Engine::render() {
 	getbegyx(stdscr, screen_min_y, screen_min_x);
 	getmaxyx(stdscr, screen_max_y, screen_max_x);
 
+	//The view is going to be constantly centered on the player.
+	//These variables should help with math.
+	int view_offset_x = (screen_max_x - screen_min_x) / 2 - player->getX();
+	int view_offset_y = (screen_max_y - screen_min_y) / 2 - player->getY();
+
 	//Draw objects
 	for(int i = 0; i < object_list.size(); i++) {
 		mvaddch(
-			object_list.at(i)->getY(),
-			object_list.at(i)->getX(),
+			object_list.at(i)->getY() + view_offset_y,
+			object_list.at(i)->getX() + view_offset_x,
 			object_list.at(i)->render()
 		);
 	}
