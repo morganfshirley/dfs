@@ -10,14 +10,10 @@ void Engine::dealWithKeys(int ch) {
 	if(ch == 'q' || ch == 'Q') {
 		running = false;
 	}
-	else if( //The following should be sent to the player
-		ch == KEY_LEFT	||	ch == KEY_RIGHT	||
-		ch == KEY_UP	||	ch == KEY_DOWN	||
-		ch == KEY_A1	||	ch == KEY_A3	||
-		ch == KEY_C1	||	ch == KEY_C3	||
-		ch == KEY_B2 ) {
+	else {
 		player_brain->setInput(ch);
 	}
+		
 }
 
 Engine::Engine() {
@@ -87,6 +83,10 @@ void Engine::render() {
 	getbegyx(stdscr, screen_min_y, screen_min_x);
 	getmaxyx(stdscr, screen_max_y, screen_max_x);
 
+	//The status bar may exist at some point! Here are some placeholder values.
+	int status_bar_size = 0;
+	int status_bar_top_size = 0;
+
 	//The view is going to be constantly centered on the player.
 	//These variables should help with math.
 	int view_offset_x = (screen_max_x - screen_min_x) / 2 - player->getX();
@@ -94,11 +94,18 @@ void Engine::render() {
 
 	//Draw objects
 	for(int i = 0; i < object_list.size(); i++) {
-		mvaddch(
-			object_list.at(i)->getY() + view_offset_y,
-			object_list.at(i)->getX() + view_offset_x,
-			object_list.at(i)->render()
-		);
+		//Only draw the object if it's on the screen.
+		if(	object_list.at(i)->getY() + view_offset_y < screen_max_y - status_bar_size &&
+			object_list.at(i)->getY() + view_offset_y > screen_min_y + status_bar_top_size &&
+			object_list.at(i)->getX() + view_offset_x < screen_max_x &&
+			object_list.at(i)->getX() + view_offset_x > screen_min_x) {
+
+			mvaddch(
+				object_list.at(i)->getY() + view_offset_y,
+				object_list.at(i)->getX() + view_offset_x,
+				object_list.at(i)->render()
+			);
+		}
 	}
 
 	//Draw cursor
