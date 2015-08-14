@@ -72,7 +72,7 @@ void Engine::run() {
 	}
 
 	//Run objects
-	for(int i = 0; i < object_list.size(); i++) {
+	for(std::size_t i = 0; i < object_list.size(); i++) {
 		object_list.at(i)->run();
 	}
 }
@@ -93,7 +93,7 @@ void Engine::render() {
 	int view_offset_y = (screen_max_y - screen_min_y) / 2 - player->getY();
 
 	//Draw objects
-	for(int i = 0; i < object_list.size(); i++) {
+	for(std::size_t i = 0; i < object_list.size(); i++) {
 		//Only draw the object if it's on the screen.
 		if(	object_list.at(i)->getY() + view_offset_y < screen_max_y - status_bar_size &&
 			object_list.at(i)->getY() + view_offset_y > screen_min_y + status_bar_top_size &&

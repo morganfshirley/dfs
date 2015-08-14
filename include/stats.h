@@ -2,8 +2,8 @@
 #define STATS_H
 
 typedef struct Stats {
-	unsigned int speed; //Inverse!
-	unsigned int hitpoints;
+	int speed; //Inverse!
+	int hitpoints;
 	double strength;
 	double armorclass;
 } Stats;

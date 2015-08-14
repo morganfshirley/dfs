@@ -1,37 +1,25 @@
-all: dfs
+CC=g++
 
-dfs: main.o object.o component.o baselogiccomponent.o rendercomponent.o species.o speciescomponent.o playerlogiccomponent.o engine.o render.o
-	g++ -g main.o object.o component.o baselogiccomponent.o rendercomponent.o engine.o playerlogiccomponent.o species.o speciescomponent.o render.o -lncurses -o dfs
+LFLAGS=-lncurses
+CFLAGS=-Wall -Wextra
 
-main.o: main.cpp engine.h 
-	g++ -g -c main.cpp
+IDIR=include
+SDIR=src
+ODIR=obj
 
-object.o: object.cpp object.h component.h
-	g++ -g -c object.cpp
+DEPS=$(wildcard $(IDIR)/*.h)
+SRCS=$(wildcard $(SDIR)/*.cpp)
+OBJS=$(SRCS:$(SDIR)/%.cpp=$(ODIR)/%.o)
 
-component.o: component.cpp component.h
-	g++ -g -c component.cpp
+PROG=dfs
 
-baselogiccomponent.o: baselogiccomponent.cpp baselogiccomponent.h
-	g++ -g -c baselogiccomponent.cpp
+all: $(PROG)
 
-playerlogiccomponent.o : playerlogiccomponent.cpp playerlogiccomponent.h
-	g++ -g -c playerlogiccomponent.cpp
+$(PROG): $(OBJS) 
+	$(CC) $(LFLAGS) $(CFLAGS) $(OBJS) -o $(PROG)
 
-rendercomponent.o: rendercomponent.cpp rendercomponent.h
-	g++ -g -c rendercomponent.cpp
-
-species.o: species.cpp species.h
-	g++ -g -c species.cpp
-
-speciescomponent.o: speciescomponent.cpp speciescomponent.h species.h
-	g++ -g -c speciescomponent.cpp
-
-engine.o: engine.cpp engine.h render.h object.h species.h
-	g++ -g -c engine.cpp
-
-render.o: render.cpp render.h
-	g++ -g -c render.cpp
+$(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
+	$(CC) $(CFLAGS) -I$(IDIR) -c -o $@ $<
 
 clean:
-	rm -rf *.o
+	rm -rf $(ODIR)/*.o $(PROG)

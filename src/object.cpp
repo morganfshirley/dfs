@@ -36,17 +36,18 @@ Object::~Object() {/**
 }
 
 Object::Object(const Object &that) {
-	for(int i = 0; i < that.components.size(); i++) {
+	for(std::size_t i = 0; i < that.components.size(); i++) {
 		Component *c = new Component(*(that.components.at(i)));
 		addComponent(c);
 	}
 }
 
 Object& Object::operator=(const Object &that) {
-	for(int i = 0; i < that.components.size(); i++) {
+	for(std::size_t i = 0; i < that.components.size(); i++) {
 		Component *c = new Component(*(that.components.at(i)));
 		addComponent(c);
 	}
+	return *this;
 }
 
 void Object::addComponent(Component *c) {
@@ -60,7 +61,7 @@ unsigned char Object::render() {
 }
 
 void Object::run() {
-	for(int i = 0; i < components.size(); i++) {
+	for(std::size_t i = 0; i < components.size(); i++) {
 		components.at(i)->run();
 	}
 }

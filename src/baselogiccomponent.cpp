@@ -1,11 +1,11 @@
 #include "object.h" //Forward-declared in component.h
 #include "baselogiccomponent.h"
 
-#include <cfloat>
+#include <climits>
 #include <cstdlib>
 
 int BaseLogicComponent::getHighestMotivation() {
-	int max_value = -DBL_MAX; //set it to the minimum
+	int max_value = -INT_MAX; //set it to the minimum
 	int max = 0;
 	for(int i = 0; i < M_NUMBER; i++) {
 		if(motivation_weights[i] > max_value) {
